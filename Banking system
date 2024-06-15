@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string> 
+using namespace std;
+
+class Bank {
+private:
+    string name;
+    long accno;
+    string typeacc;
+    int balamt;
+
+public:
+    void putdata() {
+        cout << "Enter the balance amount: ";
+        cin >> balamt;
+        cout << "Enter the name of the depositor: ";
+        cin.ignore(); 
+        getline(cin, name); 
+        cout << "Enter the type of account: ";
+        getline(cin, typeacc); 
+        cout << "Enter the account number: ";
+        cin >> accno;
+    }
+
+    int deposit() {
+        int r;
+        cout << "Enter the amount to add: ";
+        cin >> r;
+        balamt += r;
+        return balamt;
+    }
+
+    int withdraw() {
+        int s;
+        cout << "Enter the amount to withdraw: ";
+        cin >> s;
+        if (s <= balamt) {
+            balamt -= s;
+        } else {
+            cout << "Insufficient balance." << endl;
+        }
+        return balamt;
+    }
+
+    void display() {
+        cout << "Balance amount: " << balamt << endl;
+        cout << "Name of the depositor: " << name << endl;
+        cout << "Type of account: " << typeacc << endl;
+        cout << "Account number: " << accno << endl;
+    }
+};
+
+int main() {
+    Bank c;
+    c.putdata();
+    c.deposit();
+    c.withdraw();
+    c.display();
+    return 0;
+}
