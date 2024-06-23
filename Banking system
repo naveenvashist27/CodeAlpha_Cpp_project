@@ -1,5 +1,6 @@
 #include <iostream>
-#include <string> 
+#include <string>
+
 using namespace std;
 
 class Bank {
@@ -14,10 +15,10 @@ public:
         cout << "Enter the balance amount: ";
         cin >> balamt;
         cout << "Enter the name of the depositor: ";
-        cin.ignore(); 
-        getline(cin, name); 
+        cin.ignore();
+        getline(cin, name);
         cout << "Enter the type of account: ";
-        getline(cin, typeacc); 
+        getline(cin, typeacc);
         cout << "Enter the account number: ";
         cin >> accno;
     }
@@ -42,7 +43,7 @@ public:
         return balamt;
     }
 
-    void display() {
+    void display() const {
         cout << "Balance amount: " << balamt << endl;
         cout << "Name of the depositor: " << name << endl;
         cout << "Type of account: " << typeacc << endl;
@@ -50,11 +51,58 @@ public:
     }
 };
 
+void showMenu() {
+    cout << "\nBanking System Menu:" << endl;
+    cout << "1. Create account" << endl;
+    cout << "2. Deposit" << endl;
+    cout << "3. Withdraw" << endl;
+    cout << "4. Display account information" << endl;
+    cout << "5. Exit" << endl;
+}
+
 int main() {
-    Bank c;
-    c.putdata();
-    c.deposit();
-    c.withdraw();
-    c.display();
+    Bank bank;
+    int choice;
+    bool accountCreated = false;
+
+    while (true) {
+        showMenu();
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            bank.putdata();
+            accountCreated = true;
+            break;
+        case 2:
+            if (accountCreated) {
+                bank.deposit();
+            } else {
+                cout << "Please create an account first." << endl;
+            }
+            break;
+        case 3:
+            if (accountCreated) {
+                bank.withdraw();
+            } else {
+                cout << "Please create an account first." << endl;
+            }
+            break;
+        case 4:
+            if (accountCreated) {
+                bank.display();
+            } else {
+                cout << "Please create an account first." << endl;
+            }
+            break;
+        case 5:
+            cout << "Exiting the banking system. Goodbye!" << endl;
+            return 0;
+        default:
+            cout << "Invalid choice. Please try again." << endl;
+        }
+    }
+
     return 0;
 }
